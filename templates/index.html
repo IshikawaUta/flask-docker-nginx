@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Beranda | Portofolio Eka Saputra | Layanan Pembuatan Website Tangerang{% endblock %}
+{% block meta_description %}saya Eka Saputra, seorang pengembang web Full-Stack. Di sini Anda bisa menemukan layanan pembuatan website juga informasi tentang saya dan proyek-proyek yang telah saya kerjakan serta blog-blog edukasi tentang dunia teknologi.{% endblock %}
+
+{% block og_title %}Beranda | Portofolio Eka Saputra | Layanan Pembuatan Website Tangerang{% endblock %}
+{% block og_description %}saya Eka Saputra, seorang pengembang web Full-Stack. Di sini Anda bisa menemukan layanan pembuatan website juga informasi tentang saya dan proyek-proyek yang telah saya kerjakan serta blog-blog edukasi tentang dunia teknologi.{% endblock %}
+{% block og_image %}https://res.cloudinary.com/dzsqaauqn/image/upload/v1754726625/Star_a3iv6m.jpg{% endblock %}
+
+{% block content %}
+    <div class="hero" style="padding: 1.5rem 1.5rem;">
+        <h1>Selamat Datang di Portofolio Saya</h1>
+        <p>Halo, saya Eka Saputra, seorang pengembang web Full-Stack. Di sini Anda bisa menemukan informasi tentang saya dan proyek-proyek yang telah saya kerjakan. dan blog-blog edukasi tentang dunia teknologi</p>
+        <a class="button button-primary" href="{{ url_for('projects') }}"><i class="fa-solid fa-arrow-right" style="padding-right: 0.5rem;"></i> Lihat Proyek Saya</a>
+        <a class="button button-outline" href="{{ url_for('contact') }}"><i class="fa-solid fa-paper-plane" style="padding-right: 0.5rem;"></i> Hubungi Saya</a>
+    </div>
+
+    <section class="latest-projects" style="margin-top: 5rem;">
+        <h2 class="section-title">Proyek Terbaru</h2>
+        <div class="row">
+            {% for project in projects %}
+            <div class="column column-33" style="animation-delay: {{ loop.index * 0.1 }}s;">
+                <div class="card">
+                    <img src="{{ project.image_url }}" alt="{{ project.title }}" style="height: 15rem !important;">
+                    <h4>{{ project.title }}</h4>
+                    <p class="pre-formatted">{{ project.description }}</p>
+                    <p><strong>Teknologi:</strong> {{ ', '.join(project.technologies) }}</p>
+                    {% if project.demo_link %}
+                    <a class="button button-primary" href="{{ project.demo_link }}" target="_blank"><i class="fa-solid fa-globe" style="padding-right: 0.5rem;"></i> Lihat Demo</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% else %}
+            <div class="column">
+                <p>Belum ada proyek yang ditampilkan.</p>
+            </div>
+            {% endfor %}
+        </div>
+        <div style="text-align: center; margin-top: 2rem;">
+            <a class="button button-outline" href="{{ url_for('projects') }}">Lihat Semua Proyek</a>
+        </div>
+    </section>
+{% endblock %}

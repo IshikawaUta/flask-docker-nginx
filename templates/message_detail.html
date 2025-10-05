@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Detail Pesan{% endblock %}
+
+{% block content %}
+    <h1 class="section-title">Detail Pesan</h1>
+    <div class="row">
+        <div class="column column-67 column-offset-16">
+            <div class="card">
+                <h3>Pesan dari {{ message.name }}</h3>
+                <p><strong>Email:</strong> {{ message.email }}</p>
+                <p><strong>Dibuat Pada:</strong> {{ message.dibuat_pada | default('Tanggal tidak diketahui') | strftime('%A, %d %B %Y %H:%M:%S') }}</p>
+                <hr>
+                <p><strong>Pesan:</strong></p>
+                <p class="pre-formatted">{{ message.message }}</p>
+                <a href="{{ url_for('messages') }}" class="button button-outline">Kembali ke Daftar Pesan</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

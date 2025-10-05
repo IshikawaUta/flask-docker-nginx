@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Kelola Blog{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="column">
+            <h1>Kelola Blog</h1>
+            <a class="button button-primary" href="{{ url_for('add_blog') }}"><i class="fa-solid fa-plus-circle" style="padding-right: 0.5rem;"></i> Tambah Postingan Baru</a>
+            <a class="button button-outline" href="{{ url_for('admin_dashboard') }}"><i class="fa-solid fa-folder-open" style="padding-right: 0.5rem;"></i> Kembali ke Dashboard Proyek</a>
+
+            <h3>Daftar Postingan Blog</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Judul</th>
+                        <th>Tanggal</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for post in blogs %}
+                    <tr>
+                        <td>{{ post.title }}</td>
+                        <td>{{ post.created_at.strftime('%d %B %Y') }}</td>
+                        <td>
+                            <a class="button button-clear" href="{{ url_for('edit_blog', blog_id=post._id) }}"><i class="fa-solid fa-edit"></i> Edit</a>
+                            <form action="{{ url_for('delete_blog', blog_id=post._id) }}" method="post" style="display:inline;">
+                                <button class="button button-clear" type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus postingan ini?')"><i class="fa-solid fa-trash-alt"></i> Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

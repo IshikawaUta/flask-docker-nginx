@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Blog{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="column column-50 column-offset-25">
+            <h1>Edit Postingan Blog</h1>
+            <form action="{{ url_for('edit_blog', blog_id=blog_post._id) }}" method="post">
+                <fieldset>
+                    <label for="title">Judul Postingan</label>
+                    <input type="text" id="title" name="title" value="{{ blog_post.title }}" required>
+                    <label for="content">Konten</label>
+                    <textarea id="content" name="content" rows="10" required>{{ blog_post.content }}</textarea>
+                    
+                    <input class="button-primary" type="submit" value="Perbarui Postingan">
+                    <a class="button button-outline" href="{{ url_for('admin_blog_dashboard') }}">Batal</a>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+{% endblock %}

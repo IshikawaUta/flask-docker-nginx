@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Login{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="column column-50 column-offset-25">
+            <h1>Admin Login</h1>
+            <form action="{{ url_for('admin_login') }}" method="post">
+                <fieldset>
+                    <label for="username">Username</label>
+                    <input type="text" placeholder="Username" id="username" name="username" required>
+                    <label for="password">Password</label>
+                    <input type="password" placeholder="Password" id="password" name="password" required>
+                    <input class="button-primary" type="submit" value="Login">
+                </fieldset>
+            </form>
+        </div>
+    </div>
+{% endblock %}

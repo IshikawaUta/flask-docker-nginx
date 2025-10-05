@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Proyek{% endblock %}
+{% block meta_description %}Jelajahi Proyek-proyek menarik yang saya buat.{% endblock %}
+
+{% block og_title %}Proyek{% endblock %}
+{% block og_description %}Jelajahi Proyek-proyek menarik yang saya buat.{% endblock %}
+{% block og_image %}https://res.cloudinary.com/dzsqaauqn/image/upload/v1754726625/Star_a3iv6m.jpg{% endblock %}
+
+{% block content %}
+    <h1 class="section-title">Proyek-proyek Saya</h1>
+    <div class="row project-grid">
+        {% for project in projects %}
+        <div class="column column-50" style="animation-delay: {{ loop.index * 0.1 }}s;">
+            <div class="card">
+                <img src="{{ project.image_url }}" alt="{{ project.title }}" class="image-size">
+                <h4>{{ project.title }}</h4>
+                <p class="pre-formatted">{{ project.description }}</p>
+                <p><strong>Teknologi:</strong> {{ ', '.join(project.technologies) }}</p>
+                
+                {% if project.demo_link %}
+                <a class="button button-primary" href="{{ project.demo_link }}" target="_blank"><i class="fa-solid fa-globe" style="padding-right: 0.5rem;"></i> Lihat Demo</a>
+                {% endif %}
+            </div>
+        </div>
+        {% else %}
+        <div class="column">
+            <p>Belum ada proyek yang ditampilkan.</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% if total_pages > 1 %}
+    <div class="row">
+        <div class="column" style="text-align: center;">
+            <ul class="pagination">
+                <li class="pagination-item">
+                    {% if page > 1 %}
+                    <a href="{{ url_for('projects', page=page-1) }}">&laquo; Sebelumnya</a>
+                    {% else %}
+                    <span class="disabled">&laquo; Sebelumnya</span>
+                    {% endif %}
+                </li>
+                
+                {% for i in range(1, total_pages + 1) %}
+                <li class="pagination-item">
+                    {% if i == page %}
+                    <span class="active">{{ i }}</span>
+                    {% else %}
+                    <a href="{{ url_for('projects', page=i) }}">{{ i }}</a>
+                    {% endif %}
+                </li>
+                {% endfor %}
+
+                <li class="pagination-item">
+                    {% if page < total_pages %}
+                    <a href="{{ url_for('projects', page=page+1) }}">Selanjutnya &raquo;</a>
+                    {% else %}
+                    <span class="disabled">Selanjutnya &raquo;</span>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Ulasan Pelanggan{% endblock %}
+{% block meta_description %}Dengar apa kata pelanggan kami tentang layanan kami.{% endblock %}
+
+{% block og_title %}Ulasan Pelanggan{% endblock %}
+{% block og_description %}Dengar apa kata pelanggan kami tentang layanan kami.{% endblock %}
+{% block og_image %}https://res.cloudinary.com/dzsqaauqn/image/upload/v1754726625/Star_a3iv6m.jpg{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="section-title">Ulasan Pelanggan</h1>
+    <div class="row review-grid">
+        {% for review in reviews %}
+        <div class="column column-50">
+            <div class="card">
+                <h4>{{ review.author }}</h4>
+                <div>
+                    {% for _ in range(review.rating) %}
+                    <i class="fa-solid fa-star" style="color: gold;"></i>
+                    {% endfor %}
+                </div>
+                <p>{{ review.content }}</p>
+                <small>Dibuat pada: {{ review.created_at | strftime('%d %B %Y') }}</small>
+            </div>
+        </div>
+        {% else %}
+        <p>Belum ada ulasan yang tersedia saat ini.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

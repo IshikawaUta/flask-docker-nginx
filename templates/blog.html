@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Blog{% endblock %}
+{% block meta_description %}Temukan blog-blog edukasi tentang dunia teknologi.{% endblock %}
+
+{% block og_title %}Blog{% endblock %}
+{% block og_description %}Temukan blog-blog edukasi tentang dunia teknologi.{% endblock %}
+{% block og_image %}https://res.cloudinary.com/dzsqaauqn/image/upload/v1754726625/Star_a3iv6m.jpg{% endblock %}
+
+{% block content %}
+    <h1 class="section-title">Blog</h1>
+    {% if blogs %}
+        <div class="row blog-grid">
+            {% for post in blogs %}
+                <div class="column column-50" style="animation-delay: {{ loop.index * 0.1 }}s;">
+                    <div class="card">
+                        <h4>{{ post.title }}</h4>
+                        <p>Oleh: {{ post.author }} pada {{ post.created_at.strftime('%d %B %Y') }}</p>
+                        <p class="pre-formatted">{{ post.content[:200] }}...</p>
+                        <a class="button button-primary" href="{{ url_for('blog_post', blog_id=post._id) }}">Baca Selengkapnya</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="column">
+                <p style="text-align: center;">Belum ada postingan blog.</p>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if total_pages > 1 %}
+    <div class="row">
+        <div class="column" style="text-align: center;">
+            <ul class="pagination">
+                <li class="pagination-item">
+                    {% if page > 1 %}
+                    <a href="{{ url_for('blog', page=page-1) }}">&laquo; Sebelumnya</a>
+                    {% else %}
+                    <span class="disabled">&laquo; Sebelumnya</span>
+                    {% endif %}
+                </li>
+                
+                {% for i in range(1, total_pages + 1) %}
+                <li class="pagination-item">
+                    {% if i == page %}
+                    <span class="active">{{ i }}</span>
+                    {% else %}
+                    <a href="{{ url_for('blog', page=i) }}">{{ i }}</a>
+                    {% endif %}
+                </li>
+                {% endfor %}
+
+                <li class="pagination-item">
+                    {% if page < total_pages %}
+                    <a href="{{ url_for('blog', page=page+1) }}">Selanjutnya &raquo;</a>
+                    {% else %}
+                    <span class="disabled">Selanjutnya &raquo;</span>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

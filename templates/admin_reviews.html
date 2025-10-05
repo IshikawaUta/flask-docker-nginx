@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Ulasan{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="column">
+            <h2>Manajemen Ulasan</h2>
+            <a href="{{ url_for('add_review') }}" class="button button-primary">Tambah Ulasan Baru</a>
+            
+            <table class="u-full-width" style="margin-top: 2rem;">
+                <thead>
+                    <tr>
+                        <th>Penulis</th>
+                        <th>Isi</th>
+                        <th>Rating</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for review in reviews %}
+                    <tr>
+                        <td>{{ review.author }}</td>
+                        <td>{{ review.content }}</td>
+                        <td>{{ review.rating }} Bintang</td>
+                        <td>
+                            <form action="{{ url_for('delete_review', review_id=review._id) }}" method="POST" style="display:inline;">
+                                <button type="submit" class="button button-clear">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

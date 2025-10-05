@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Portofolio Eka Saputra | Layanan Pembuatan Website Tangerang{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}saya Eka Saputra, seorang pengembang web Full-Stack. Di sini Anda bisa menemukan layanan pembuatan website juga informasi tentang saya dan proyek-proyek yang telah saya kerjakan serta blog-blog edukasi tentang dunia teknologi.{% endblock %}">
+    <link rel="icon" type="image/png" href="https://res.cloudinary.com/dzsqaauqn/image/upload/v1754726625/Star_a3iv6m.jpg">
+    <meta property="og:title" content="{% block og_title %}{{ self.title() }}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{{ self.meta_description() }}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}https://res.cloudinary.com/dzsqaauqn/image/upload/v1754726625/Star_a3iv6m.jpg{% endblock %}">
+    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/milligram.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+    <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav class="navigation">
+                <a class="navigation-title" href="{{ url_for('index') }}">Portofolio</a>
+                <ul class="navigation-list">
+                    <li class="navigation-item"><a class="navigation-link" href="{{ url_for('index') }}"><i class="fa-solid fa-house"></i> Beranda</a></li>
+                    <li class="navigation-item"><a class="navigation-link" href="{{ url_for('about') }}"><i class="fa-solid fa-user"></i> Tentang Saya</a></li>
+                    <li class="navigation-item"><a class="navigation-link" href="{{ url_for('projects') }}"><i class="fa-solid fa-folder-open"></i> Proyek</a></li>
+                    <li class="navigation-item"><a class="navigation-link" href="{{ url_for('blog') }}"><i class="fa-solid fa-blog"></i> Blog</a></li>
+                    <li class="navigation-item"><a class="navigation-link" href="{{ url_for('services') }}"><i class="fa-solid fa-gears"></i> Layanan</a></li>
+                    <li class="navigation-item"><a class="navigation-link" href="{{ url_for('tools') }}"><i class="fa-solid fa-tools"></i> Alat & Teknologi</a></li>
+                    <li class="navigation-item"><a class="navigation-link" href="{{ url_for('contact') }}"><i class="fa-solid fa-envelope"></i> Kontak</a></li>
+                    <button id="theme-toggle" aria-label="Toggle light and dark mode" class="position">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="flashes">
+                {% for category, message in messages %}
+                <p class="flash-{{ category }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+        </main>
+        <footer>
+            <p>&copy; 2025 Eka Saputra. Hak Cipta Dilindungi.</p>
+        </footer>
+    </div>
+
+    <a id="scrollUp" href="#top" title="Gulir ke atas"><i class="fa-solid fa-arrow-up"></i></a>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
+
+        // Fungsi untuk menerapkan tema
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                body.classList.add('dark-mode');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                body.classList.remove('dark-mode');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+
+        // Cek preferensi pengguna di local storage saat halaman dimuat
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            applyTheme(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            // Jika tidak ada preferensi, gunakan preferensi sistem
+            applyTheme('dark');
+        } else {
+            applyTheme('light');
+        }
+
+        // Tambahkan event listener untuk tombol
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark-mode')) {
+                applyTheme('light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                applyTheme('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Daftar Pesan Kontak{% endblock %}
+
+{% block content %}
+    <h1 class="section-title">Daftar Pesan Kontak</h1>
+    <div class="row">
+        <div class="column">
+            {% if messages %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>Dibuat Pada</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for message in messages %}
+                    <tr>
+                        <td>{{ message.name }}</td>
+                        <td>{{ message.email }}</td>
+                        <td>{{ message.dibuat_pada | default('Tanggal tidak diketahui') | strftime('%d %B %Y %H:%M') }}</td>
+                        <td>
+                            <a href="{{ url_for('message_detail', message_id=message._id) }}" class="button button-primary">Lihat Detail</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p style="text-align: center;">Tidak ada pesan yang masuk.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if total_pages > 1 %}
+    <div class="row">
+        <div class="column" style="text-align: center;">
+            <ul class="pagination">
+                <li class="pagination-item">
+                    {% if page > 1 %}
+                    <a href="{{ url_for('messages', page=page-1) }}">&laquo; Sebelumnya</a>
+                    {% else %}
+                    <span class="disabled">&laquo; Sebelumnya</span>
+                    {% endif %}
+                </li>
+                {% for i in range(1, total_pages + 1) %}
+                <li class="pagination-item">
+                    {% if i == page %}
+                    <span class="active">{{ i }}</span>
+                    {% else %}
+                    <a href="{{ url_for('messages', page=i) }}">{{ i }}</a>
+                    {% endif %}
+                </li>
+                {% endfor %}
+                <li class="pagination-item">
+                    {% if page < total_pages %}
+                    <a href="{{ url_for('messages', page=page+1) }}">Selanjutnya &raquo;</a>
+                    {% else %}
+                    <span class="disabled">Selanjutnya &raquo;</span>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+
+{% endblock %}

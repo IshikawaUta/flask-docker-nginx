@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}{{ blog_post.title }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="column column-75 column-offset-12">
+            <h1>{{ blog_post.title }}</h1>
+            <p style="color: gray;">Oleh: {{ blog_post.author }} pada {{ blog_post.created_at.strftime('%d %B %Y') }}</p>
+            <div class="blog-content" style="margin-top: 3rem;">
+                <p class="pre-formatted">{{ blog_post.content }}</p>
+            </div>
+        </div>
+    </div>
+    <a class="button button-outline" href="{{ url_for('blog') }}">Kembali</a>
+{% endblock %}

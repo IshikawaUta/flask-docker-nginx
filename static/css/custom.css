@@ -1,0 +1,501 @@
+/*
+ * custom.css
+ * File ini berisi gaya kustom untuk portofolio, termasuk mode gelap/terang.
+ */
+
+/* --- Variabel Warna untuk Mode Terang (Default) --- */
+:root {
+    --bg-color: #f0f2f5;
+    --text-color: #4a4a4a;
+    --heading-color: #2c3e50;
+    --card-bg: #ffffff;
+    --border-color: #e1e1e1;
+    --primary-color: #3498db;
+    --primary-dark: #2980b9;
+    --link-hover-color: #9b4dca;
+}
+
+/* --- Variabel Warna untuk Mode Gelap --- */
+body.dark-mode {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --heading-color: #ffffff;
+    --card-bg: #1e1e1e;
+    --border-color: #333333;
+    --primary-color: #3498db;
+    --primary-dark: #2980b9;
+    --link-hover-color: #9b4dca;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.7;
+    transition: background-color 0.5s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    color: var(--heading-color);
+    margin-bottom: 1rem;
+}
+
+/* --- Container & Layout --- */
+.container {
+    max-width: 1100px;
+    margin: 4rem auto;
+    padding: 0 1.5rem;
+}
+
+/* --- Header & Navigation --- */
+header {
+    background-color: var(--card-bg);
+    padding: 1.5rem 0;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-bottom: 3rem;
+    animation: fadeInDown 0.8s ease-in-out;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.navigation-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--heading-color);
+    transition: color 0.3s ease;
+}
+
+.navigation-title:hover {
+    color: var(--primary-color);
+}
+
+.navigation-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center; /* Untuk menengahkan tombol tema */
+}
+
+.navigation-item {
+    margin-left: 2rem;
+}
+
+.navigation-link {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.3s ease, transform 0.3s ease;
+    position: relative;
+}
+
+.navigation-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.navigation-link:hover::after {
+    width: 100%;
+}
+
+/* --- Tombol Theme Toggle --- */
+#theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-left: 1rem;
+    transition: color 0.3s ease;
+}
+#theme-toggle:hover {
+    color: var(--primary-color);
+}
+
+/* --- Main Content Sections --- */
+.hero {
+    text-align: center;
+    padding: 4rem 0;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    animation: fadeInUp 1s ease-in-out;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--heading-color);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+}
+
+/* --- Card Components (Proyek & Tools) --- */
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    animation: scaleIn 0.6s ease-out;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.card h4 {
+    color: var(--heading-color);
+    margin-bottom: 0.5rem;
+}
+
+.card p {
+    font-size: 0.95rem;
+}
+
+/* --- Penyesuaian Layout Blog Grid --- */
+.blog-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.blog-grid .column {
+    display: flex;
+    padding-bottom: 2rem;
+}
+
+/* Pastikan card di dalam kolom memiliki tinggi yang sama */
+.blog-grid .card {
+    height: 100%;
+    min-width: 100%;
+}
+
+.project-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.project-grid .column {
+    display: flex;
+    padding-bottom: 2rem;
+}
+
+.review-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.review-grid .column {
+    display: flex;
+    padding-bottom: 2rem;
+}
+
+.review-grid .card {
+    height: 100%;
+    min-width: 100%;
+}
+
+.tool-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tool-grid .column {
+    display: flex;
+    padding-bottom: 2rem;
+}
+
+.tool-grid .card {
+    height: 100%;
+    min-width: 100%;
+}
+
+/* --- Buttons --- */
+.button {
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-radius: 50px;
+    padding: 0.75rem 2rem;
+    margin: 0.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1; 
+}
+
+.button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.button-primary {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: #ffffff !important;
+}
+
+.button-primary:hover {
+    background-color: var(--primary-dark) !important;
+    border-color: var(--primary-dark) !important;
+}
+
+.button-clear {
+    color: #3498db !important;
+}
+
+.button-clear:hover {
+    color: #2980b9 !important;
+}
+
+.button-outline {
+    background-color: transparent;
+    border: 2px solid var(--primary-color) !important;
+    color: var(--primary-color) !important;
+}
+
+.button-outline:hover {
+    background-color: var(--primary-color) !important;
+    color: #ffffff !important;
+}
+
+/* --- Form Styles --- */
+form {
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0);
+    animation: fadeInUp 0.8s ease-in-out;
+}
+
+input[type="text"], input[type="email"], input[type="password"], textarea {
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+/* --- Flashed Messages (Notifications) --- */
+.flashes p {
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.flash-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-left: 5px solid #28a745;
+}
+
+.flash-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-left: 5px solid #dc3545;
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding-top: 2rem;
+    margin-top: 4rem;
+    color: var(--text-color);
+}
+
+.pre-formatted {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* --- Animations --- */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.image-size {
+    height: 20rem !important;
+    width: 100% !important;
+}
+
+/* --- Pagination --- */
+.pagination {
+    list-style: none;
+    margin: 2rem 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination-item {
+    margin: 0 0.25rem;
+}
+
+.pagination-item a,
+.pagination-item span {
+    text-decoration: none;
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.pagination-item a {
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.pagination-item a:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.pagination-item span.active {
+    background-color: var(--primary-color);
+    color: white;
+    border: 1px solid var(--primary-color);
+}
+
+.pagination-item span.disabled {
+    color: #999;
+    cursor: not-allowed;
+    border: 1px solid #ddd;
+}
+
+/* --- Scroll Up Button --- */
+#scrollUp {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 999;
+}
+
+#scrollUp.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- Responsive Layout --- */
+@media (max-width: 768px) {
+    .navigation {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .navigation-list {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 1rem;
+        width: 100%;
+    }
+    .navigation-item {
+        margin: 0.5rem 0;
+    }
+    .navigation-link {
+        font-size: 1.1rem;
+        padding: 0.5rem 0;
+    }
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    .hero p {
+        font-size: 1rem;
+    }
+    
+    .row {
+        flex-direction: column;
+    }
+
+    .column,
+    .column-25,
+    .column-33,
+    .column-50 {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        flex-basis: 100% !important;
+    }
+
+    .blog-grid .column {
+    padding: 0;
+    }
+
+    .position {
+        margin-left: -2.7rem !important;
+    }
+
+    .image-size {
+    height: 15rem !important;
+    width: 100% !important;
+}
+}

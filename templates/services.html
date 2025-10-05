@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Layanan Pembuatan Website{% endblock %}
+{% block meta_description %}Hubungi Kami Sekarang!, Kami siap membantu Anda membuat website yang profesional dan menarik.{% endblock %}
+
+{% block og_title %}Layanan Pembuatan Website{% endblock %}
+{% block og_description %}Hubungi Kami Sekarang!, Kami siap membantu Anda membuat website yang profesional dan menarik.{% endblock %}
+{% block og_image %}https://res.cloudinary.com/dzsqaauqn/image/upload/v1754726625/Star_a3iv6m.jpg{% endblock %}
+
+{% block content %}
+    <h1 class="section-title">Layanan Jasa Pembuatan Website</h1>
+    <div class="row">
+        <div class="column column-67 column-offset-16">
+            <div class="card">
+                <h3>Hubungi Kami Sekarang!</h3>
+                <p>Kami siap membantu Anda membuat website yang profesional dan menarik. Isi formulir di bawah ini dan kami akan segera menghubungi Anda melalui WhatsApp.</p>
+                <form id="whatsapp-form" onsubmit="sendWhatsAppMessage(); return false;">
+                    <label for="nama">Nama Lengkap</label>
+                    <input type="text" id="nama" name="nama" required>
+                    
+                    <label for="email">Alamat Email</label>
+                    <input type="email" id="email" name="email" required>
+                    
+                    <label for="jenis_website">Jenis Website yang Dibutuhkan</label>
+                    <select id="jenis_website" name="jenis_website" required>
+                        <option value="">-- Pilih Jenis Website --</option>
+                        <option value="Landing Page">Landing Page</option>
+                        <option value="Website Portofolio">Website Portofolio</option>
+                        <option value="Toko Online (E-commerce)">Toko Online (E-commerce)</option>
+                        <option value="Website Perusahaan">Website Perusahaan</option>
+                        <option value="Blog Pribadi">Blog Pribadi</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
+                    
+                    <label for="deskripsi">Deskripsi Singkat Proyek</label>
+                    <textarea id="deskripsi" name="deskripsi" rows="5" required></textarea>
+                    
+                    <button type="submit" class="button button-primary">
+                        <i class="fa-brands fa-whatsapp" style="padding-right: 0.5rem;"></i> Kirim Pesan via WhatsApp
+                    </button>
+                    <a class="button button-outline" href="{{ url_for('reviews') }}"><i class="fa-solid fa-star" style="padding-right: 0.5rem;"></i> Ulasan</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function sendWhatsAppMessage() {
+        const nama = document.getElementById('nama').value;
+        const email = document.getElementById('email').value;
+        const jenis_website = document.getElementById('jenis_website').value;
+        const deskripsi = document.getElementById('deskripsi').value;
+
+        const nomorWhatsApp = '62895701060973';
+        const pesan = `Halo, saya ${nama} (${email}). Saya tertarik dengan layanan pembuatan website.
+
+    Jenis website yang saya butuhkan: ${jenis_website}
+
+    Berikut deskripsi singkat proyek saya:
+    ${deskripsi}
+
+    Mohon informasinya lebih lanjut. Terima kasih.`;
+
+            const urlWhatsApp = `https://wa.me/${nomorWhatsApp}?text=${encodeURIComponent(pesan)}`;
+
+            window.open(urlWhatsApp, '_blank');
+        }
+    </script>
+{% endblock %}

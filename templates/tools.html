@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Alat & Teknologi{% endblock %}
+{% block meta_description %}Jelajahi tools dan frameworks yang saya gunakan untuk membuat website.{% endblock %}
+
+{% block og_title %}Alat & Teknologi{% endblock %}
+{% block og_description %}Jelajahi tools dan frameworks yang saya gunakan untuk membuat website.{% endblock %}
+{% block og_image %}https://res.cloudinary.com/dzsqaauqn/image/upload/v1754726625/Star_a3iv6m.jpg{% endblock %}
+
+{% block content %}
+    <h1 class="section-title">Alat dan Teknologi</h1>
+    <p style="text-align: center; margin-bottom: 3rem;">Berikut adalah beberapa alat dan teknologi yang saya gunakan dalam pekerjaan saya.</p>
+    
+    <div class="row tool-grid">
+        {% for tool in tools[:3] %}
+        <div class="column column-33">
+            <div class="card">
+                <h5><i class="fa-solid fa-code"></i> {{ tool.name }}</h5>
+                <p>{{ tool.type }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="row tool-grid">
+        {% for tool in tools[3:] %}
+        <div class="column column-33">
+            <div class="card">
+                <h5><i class="fa-solid fa-code"></i> {{ tool.name }}</h5>
+                <p>{{ tool.type }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

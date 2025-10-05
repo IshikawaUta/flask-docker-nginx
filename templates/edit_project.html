@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Proyek{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="column column-50 column-offset-25">
+            <h1>Edit Proyek</h1>
+            <form action="{{ url_for('edit_project', project_id=project._id) }}" method="post" enctype="multipart/form-data">
+                <fieldset>
+                    <label for="title">Judul</label>
+                    <input type="text" id="title" name="title" value="{{ project.title }}" required>
+                    <label for="description">Deskripsi</label>
+                    <textarea id="description" name="description" required>{{ project.description }}</textarea>
+                    <label for="technologies">Alat & Teknologi (pisahkan dengan koma)</label>
+                    <input type="text" id="technologies" name="technologies" value="{{ ', '.join(project.technologies) }}" required>
+                    
+                    <label for="demo_link">Link Demo (opsional)</label>
+                    <input type="url" id="demo_link" name="demo_link" value="{{ project.demo_link }}" placeholder="https://www.proyek-anda.com">
+                    
+                    <label for="current_image">Gambar Saat Ini:</label>
+                    <img src="{{ project.image_url }}" alt="{{ project.title }}" style="max-width: 100%; height: auto;">
+                    
+                    <label for="image">Ubah Gambar Proyek (opsional)</label>
+                    <input type="file" id="image" name="image">
+                    
+                    <input class="button-primary" type="submit" value="Perbarui Proyek">
+                    <a class="button button-outline" href="{{ url_for('admin_dashboard') }}">Batal</a>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+{% endblock %}
