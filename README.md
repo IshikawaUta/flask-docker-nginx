@@ -166,4 +166,3 @@ Jika Anda ingin berkontribusi, silakan fork repositori ini dan buat pull request
 Proyek ini dilisensikan di bawah MIT License. Lihat file LICENSE untuk detail lebih lanjut.
 
 Terima kasih telah mengunjungi proyek ini! Jika ada pertanyaan, hubungi melalui formulir kontak di situs. 🚀
-```
