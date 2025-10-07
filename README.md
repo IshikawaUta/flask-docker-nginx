@@ -1,6 +1,6 @@
 # 📁 Portofolio Pribadi (Milligram CSS) - Versi Terbaru
 
-![Portofolio Web](https://res.cloudinary.com/dzsqaauqn/image/upload/v1754627248/Screenshot_2025-08-08_111921_tdddvc.jpg)
+![Portofolio Web](https://res.cloudinary.com/dzsqaauqn/image/upload/v1724627248/Screenshot_2024-08-08_111921_tdddvc.jpg)
 
 ## Deskripsi Proyek
 
@@ -15,7 +15,7 @@ Ini adalah proyek portofolio pribadi yang dibangun menggunakan **Python** dan fr
 * **Otomatisasi Email**: Flask-Mail untuk mengirim notifikasi email dari formulir kontak.
 * **Fitur Tambahan**: Halaman tools, services, reviews publik, dan manajemen pesan kontak.
 * **Keamanan**: Hashing kata sandi admin menggunakan Werkzeug, serta Flask-Login untuk autentikasi.
-* **Kontainerisasi**: Dukungan Docker dan Nginx untuk deployment produksi yang skalabel.
+* **Kontainerisasi**: Dukungan Docker dan Nginx untuk deployment produksi yang skalabel, termasuk integrasi ngrok untuk tunneling lokal ke publik.
 
 ---
 
@@ -29,7 +29,7 @@ Ini adalah proyek portofolio pribadi yang dibangun menggunakan **Python** dan fr
 * **Penyimpanan Media**: Cloudinary
 * **Email**: Flask-Mail
 * **Autentikasi**: Flask-Login
-* **Deployment**: Gunicorn (untuk produksi), Vercel, Docker, Nginx
+* **Deployment**: Gunicorn (untuk produksi), Vercel, Docker, Nginx, ngrok (untuk tunneling)
 * **Lainnya**: `python-dotenv` untuk variabel lingkungan, `Flask-PyMongo`, `bidict` untuk SocketIO (jika diperlukan di masa depan)
 
 ---
@@ -120,8 +120,9 @@ MAIL_PASSWORD=<KATA_SANDI_EMAIL_ANDA>
 MAIL_DEFAULT_SENDER=<EMAIL_DEFAULT_ANDA>
 ADMIN_USERNAME=admin
 ADMIN_PASSWORD_HASH=<HASH_KATA_SANDI_ADMIN>
+NGROK_AUTHTOKEN_DOCKER=<NGROK_AUTHTOKEN_ANDA>
 ```
-**Catatan**: Gunakan `werkzeug.security.generate_password_hash('password_anda')` untuk membuat hash kata sandi admin.
+**Catatan**: Gunakan `werkzeug.security.generate_password_hash('password_anda')` untuk membuat hash kata sandi admin. Untuk ngrok, daftar di ngrok.com untuk mendapatkan authtoken.
 
 ### 5. Menjalankan Proyek Secara Lokal
 Setelah semua persiapan selesai, Anda dapat menjalankan aplikasi Flask:
@@ -142,7 +143,7 @@ Proyek ini telah dikonfigurasi untuk di-*deploy* dengan mudah menggunakan Vercel
 ---
 
 ## Deployment dengan Docker
-Proyek ini mendukung kontainerisasi menggunakan Docker untuk lingkungan produksi. File `Dockerfile`, `docker-compose.yml`, dan `nginx.conf` sudah disediakan.
+Proyek ini mendukung kontainerisasi menggunakan Docker untuk lingkungan produksi. File `Dockerfile`, `docker-compose.yml`, dan `nginx.conf` sudah disediakan. Integrasi ngrok memungkinkan tunneling dari lokal ke URL publik untuk pengujian.
 
 ### Persyaratan:
 - Instal Docker dan Docker Compose.
@@ -152,10 +153,10 @@ Proyek ini mendukung kontainerisasi menggunakan Docker untuk lingkungan produksi
    ```bash:disable-run
    docker-compose up -d --build
    ```
-2. Aplikasi akan tersedia di `http://localhost:80`.
-3. Untuk produksi, sesuaikan `nginx.conf` dan variabel lingkungan di `.env`.
+2. Aplikasi akan tersedia di `http://localhost:80`. Untuk akses publik via ngrok, periksa dashboard ngrok di `http://localhost:4040` untuk mendapatkan URL tunneling.
+3. Untuk produksi, sesuaikan `nginx.conf` dan variabel lingkungan di `.env`. Gunakan `restart: always` untuk ketahanan.
 
-**Catatan**: Pastikan `.env` dimuat dengan benar di Docker. Gunakan `restart: always` untuk ketahanan.
+**Catatan**: Pastikan `.env` dimuat dengan benar di Docker. Ngrok memerlukan authtoken valid di `.env` untuk berfungsi.
 
 ---
 

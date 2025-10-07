@@ -17,3 +17,17 @@ services:
     depends_on:
       - flask_app
     restart: always
+
+  ngrok:
+    image: ngrok/ngrok:alpine
+    container_name: ngrok
+    environment:
+      NGROK_AUTHTOKEN: ${NGROK_AUTHTOKEN_DOCKER} 
+    command: 
+      - "http"
+      - "nginx:80" 
+    ports:
+      - "4040:4040"
+    depends_on:
+      - nginx
+    restart: always
