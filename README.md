@@ -1,6 +1,6 @@
 # 📁 Portofolio Pribadi (Milligram CSS) - Versi Terbaru
 
-![Portofolio Web](https://res.cloudinary.com/dzsqaauqn/image/upload/v1724627248/Screenshot_2024-08-08_111921_tdddvc.jpg)
+![Portofolio Web](https://res.cloudinary.com/dzsqaauqn/image/upload/v1754627248/Screenshot_2025-08-08_111921_tdddvc.jpg)
 
 ## Deskripsi Proyek
 
